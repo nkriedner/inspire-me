@@ -3,7 +3,10 @@
 // IMPORT MODULES
 import { useEffect, useState } from "react";
 
-// HOME COMPONENT (STATELESS)
+// IMPORT COMPONENTS
+import InspirationDetails from "../components/InspirationDetails";
+
+// HOME COMPONENT (STATEFUL)
 const Home = () => {
     // Create state for the inspiration data
     const [inspirations, setInspirations] = useState(null);
@@ -30,16 +33,13 @@ const Home = () => {
     return (
         // Render the main part of the / route
         <main>
-            <h2>HOME Page</h2>
+            <h2>Inspiration List</h2>
             <br />
 
             {/* If there are courses -> show them */}
             {inspirations &&
                 inspirations.map((inspiration) => (
-                    <div key={inspiration._id}>
-                        <p>{inspiration.content}</p>
-                        <br />
-                    </div>
+                    <InspirationDetails key={inspiration._id} inspiration={inspiration} />
                 ))}
         </main>
     );

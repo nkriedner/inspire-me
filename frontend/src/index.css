@@ -31,3 +31,10 @@ main {
     background-color: orange;
     padding: 4rem;
 }
+.inspiration {
+    background: maroon;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
