@@ -2,6 +2,7 @@
 require("dotenv").config(); // enables the use of environment variables
 const express = require("express");
 const mongoose = require("mongoose"); // ODM library for MongoDB
+const cors = require("cors"); // package that enables cross-origin requests
 
 // IMPORT ROUTES
 const inspirationRoutes = require("./routes/inspirationRoutes");
@@ -10,6 +11,7 @@ const inspirationRoutes = require("./routes/inspirationRoutes");
 const app = express();
 
 // GLOBAL MIDDLEWARE
+app.use(cors()); // enables cross-origin requests
 app.use(express.json()); // parse json data from a request and enables to access it from 'req.body'
 app.use((req, res, next) => {
     console.log(`${req.method} request to ${req.path} route...`);
