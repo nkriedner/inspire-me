@@ -1,9 +1,8 @@
-// Fetch inspiration data from the backend
-
 // IMPORT MODULES
 import { useEffect, useState } from "react";
 
 // IMPORT COMPONENTS
+import InspirationForm from "../components/InspirationForm";
 import InspirationDetails from "../components/InspirationDetails";
 
 // HOME COMPONENT (STATEFUL)
@@ -33,10 +32,10 @@ const Home = () => {
     return (
         // Render the main part of the / route
         <main>
-            <h2>Inspiration List</h2>
-            <br />
+            <InspirationForm />
 
-            {/* If there are courses -> show them */}
+            <h2>Inspiration List</h2>
+            {/* Show courses list once they are fetched from database */}
             {inspirations &&
                 inspirations.map((inspiration) => (
                     <InspirationDetails key={inspiration._id} inspiration={inspiration} />

@@ -1,4 +1,4 @@
-// INSPIRATIIONDETAILS COMPONENT (STATELESS)
+// INSPIRATION DETAILS COMPONENT (STATELESS)
 const InspirationDetails = ({ inspiration }) => {
     return (
         <div className="inspiration">
