@@ -16,6 +16,11 @@ export const inspirationReducer = (state, action) => {
             return {
                 inspirations: [action.payload, ...state.inspirations], // adds the payload (new inspiration) to the existing array of inspirations
             };
+        case "DELETE_INSPIRATION":
+            return {
+                // filter through the inspirations and keep only those not matching the payload
+                inspirations: state.inspirations.filter((inspiration) => inspiration._id !== action.payload._id),
+            };
         // Default case for unknown actions
         default:
             return state;
