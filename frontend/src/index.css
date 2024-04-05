@@ -1,9 +1,33 @@
+/* CSS RESET */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+/* GENERAL STYLES */
 body {
     font-family: Arial, Helvetica, sans-serif;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER STYLES */
+header {
+    width: 100vw;
+    background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+/* MAIN STYLES */
+main {
+    background-color: orange;
+    padding: 4rem;
 }
