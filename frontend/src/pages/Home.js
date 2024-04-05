@@ -1,5 +1,6 @@
-// IMPORT MODULES
-import { useEffect, useState } from "react";
+// IMPORT MODULES & HOOKS
+import { useEffect } from "react";
+import { useInspirationContext } from "../hooks/useInspirationContext";
 
 // IMPORT COMPONENTS
 import InspirationForm from "../components/InspirationForm";
@@ -7,8 +8,8 @@ import InspirationDetails from "../components/InspirationDetails";
 
 // HOME COMPONENT (STATEFUL)
 const Home = () => {
-    // Create state for the inspiration data
-    const [inspirations, setInspirations] = useState(null);
+    // Invoke Inspiration Context Hook for state updates
+    const { inspirations, dispatch } = useInspirationContext();
 
     // Fetch inspiration data when component renders with useEffect hook
     useEffect(() => {
@@ -21,13 +22,13 @@ const Home = () => {
             // Check if the response is ok (= no error)
             if (response.ok) {
                 // Update state with received data
-                setInspirations(responseJson);
+                dispatch({ type: "SET_INSPIRATIONS", payload: responseJson });
             }
         };
 
         // Call the function to fetch the data
         fetchInspirations();
-    }, []);
+    }, [dispatch]);
 
     return (
         // Render the main part of the / route

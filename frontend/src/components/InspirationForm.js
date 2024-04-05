@@ -1,8 +1,12 @@
-// IMPORT MODULES
+// IMPORT MODULES & HOOKS
 import { useState } from "react";
+import { useInspirationContext } from "../hooks/useInspirationContext";
 
 // INSPIRATION FORM COMPONENT (STATELESS)
 const InspirationForm = () => {
+    // Invoke Inspiration Context Hook for state updates
+    const { dispatch } = useInspirationContext();
+
     // Create state for the inspiration and error data
     const [content, setContent] = useState("");
     const [source, setSource] = useState("");
@@ -43,6 +47,9 @@ const InspirationForm = () => {
             setError(null);
 
             console.log("New inspiration added:", responseJson);
+
+            // Update global inspiration state with new inspiration
+            dispatch({ type: "CREATE_INSPIRATION", payload: responseJson });
         }
     };
 

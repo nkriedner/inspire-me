@@ -8,6 +8,7 @@ import "./index.css";
 
 // IMPORT COMPONENTS
 import App from "./App";
+import { InspirationContextProvider } from "./context/InspirationContext";
 
 // INITIALIZE REACT ROOT ELEMENT
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -18,7 +19,10 @@ root.render(
     <React.StrictMode>
         {/* Wrap app in BrowserRouter */}
         <BrowserRouter>
-            <App />
+            {/* Wrap app in InspirationContextProvider */}
+            <InspirationContextProvider>
+                <App />
+            </InspirationContextProvider>
         </BrowserRouter>
     </React.StrictMode>
 );
