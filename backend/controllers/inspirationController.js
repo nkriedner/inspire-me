@@ -41,6 +41,20 @@ const getInspiration = async (req, res) => {
 const createInspiration = async (req, res) => {
     const { content, source, category } = req.body; // destructures the data from the request body
 
+    let emptyFields = []; // holds the empty input fields of the create inspiration form
+
+    // Check if 'content' field is empty
+    if (!content) {
+        // add 'content' to emptyFields array
+        emptyFields.push("content");
+    }
+
+    // Checkk if any required fields are empty
+    if (emptyFields.length > 0) {
+        // Send a response with a custom error message and the emptyFields array
+        return res.status(400).json({ error: "Please fill in the required field!", emptyFields });
+    }
+
     try {
         // create new inspiration (= add a document to database)
         const inspiration = await Inspiration.create({ content, source, category });

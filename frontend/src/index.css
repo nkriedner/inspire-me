@@ -46,3 +46,11 @@ main {
     cursor: pointer;
     padding: 0.5rem 1rem;
 }
+.error {
+    border: 5px solid red;
+    border-radius: 5px;
+}
+div.error {
+    color: red;
+    padding: 0.5rem;
+}

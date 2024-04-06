@@ -7,11 +7,12 @@ const InspirationForm = () => {
     // Invoke Inspiration Context Hook for state updates
     const { dispatch } = useInspirationContext();
 
-    // Create state for the inspiration and error data
+    // Create state for the inspiration, error and emptyfields data
     const [content, setContent] = useState("");
     const [source, setSource] = useState("");
     const [category, setCategory] = useState("");
     const [error, setError] = useState(null);
+    const [emptyFields, setEmptyFields] = useState([]); // holds the array of required but empty form fields
 
     // HandleSubmit function for form submissions
     const handleSubmit = async (e) => {
@@ -37,6 +38,8 @@ const InspirationForm = () => {
         if (!response.ok) {
             // set / update error state
             setError(responseJson.error);
+            // set the emptyFields state with the emptyFields array received in the response
+            setEmptyFields(responseJson.emptyFields);
         }
         // If there was no problem with the response
         if (response.ok) {
@@ -45,6 +48,7 @@ const InspirationForm = () => {
             setSource("");
             setCategory("");
             setError(null);
+            setEmptyFields([]);
 
             console.log("New inspiration added:", responseJson);
 
@@ -59,23 +63,44 @@ const InspirationForm = () => {
 
             <div>
                 <label htmlFor="content">Content:</label>
-                <input type="text" id="content" onChange={(e) => setContent(e.target.value)} value={content} />
+
+                {/* Give this (required) input a conditional error class based on wether it was empty when form was sent  */}
+                <input
+                    type="text"
+                    id="content"
+                    onChange={(e) => setContent(e.target.value)}
+                    value={content}
+                    placeholder="(required)"
+                    className={emptyFields.includes("content") ? "error" : ""}
+                />
             </div>
 
             <div>
                 <label htmlFor="source">Source:</label>
-                <input type="text" id="source" onChange={(e) => setSource(e.target.value)} value={source} />
+                <input
+                    type="text"
+                    id="source"
+                    onChange={(e) => setSource(e.target.value)}
+                    value={source}
+                    placeholder="(optional)"
+                />
             </div>
 
             <div>
                 <label htmlFor="category">Category:</label>
-                <input type="text" id="category" onChange={(e) => setCategory(e.target.value)} value={category} />
+                <input
+                    type="text"
+                    id="category"
+                    onChange={(e) => setCategory(e.target.value)}
+                    value={category}
+                    placeholder="(optional)"
+                />
             </div>
 
             <button type="submit">Add inspiration</button>
 
             {/* Show the error(s) if there are any */}
-            {error && <div>ERROR: {error}</div>}
+            {error && <div className="error">{error}</div>}
         </form>
     );
 };
